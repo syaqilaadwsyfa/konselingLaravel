@@ -8,7 +8,7 @@
   {{-- <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}"> --}}
 @endpush
 
-@section('title', 'Siswa')
+@section('title', 'pelanggaran')
 
 @section('content')
     <!-- Content Header (Page header) -->
@@ -16,7 +16,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Data Siswa</h1>
+            <h1>Data pelanggaran</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -35,11 +35,11 @@
               <div class="card">
                 <div class="card-header">
                   <div class="col text-right">
-                      {{-- <a href="{{ route('siswa.create') }}" class="btn btn-sm btn-primary">
-                          <i class="fas fa-plus"></i> Add Siswa
+                      {{-- <a href="{{ route('pelanggaran.create') }}" class="btn btn-sm btn-primary">
+                          <i class="fas fa-plus"></i> Add pelanggaran
                       </a> --}}
                       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createModal">
-                          Tambah Siswa
+                          Tambah pelanggaran
                       </button>
                   </div>
                   </div>
@@ -51,26 +51,33 @@
                     <th>No</th>
                     <th>NIS</th>
                     <th>Nama</th>
-                    <th>Alamat</th>
+                    <th>Pelanggaran</th>
                     <th>Kelas</th>
-                    <th>Tahun Angkatan</th>
+                    {{-- <th>Catatan</th>
+                    <th>Tgl Pelanggaran</th>
+                    <th>Tindakan</th> --}}
                     <th>Action</th>
                   </tr>
                   </thead>
                   <tbody>
-                    @foreach($siswas as $key => $value)
+                    @foreach($pelanggarans as $key => $value)
                     <tr>
                         <td>{{ $key +1 }} </td>
                         <td>{{ $value->nis }} </td>
                         <td>{{ $value->nama }} </td>
-                        <td>{{ $value->alamat }} </td>
                         <td>{{ $value->kelas }} </td>
-                        <td>{{ $value->tahun_angkatan }} </td>
-                        <td>
-                            <a href="{{ route('siswa.show', $value->id) }}" class="btn btn-sm btn-info" style="margin-left: 8px;">Detail</a>
-                            <a href="{{ route('siswa.edit', $value->id) }}" class="btn btn-sm btn-warning" style="margin-left: 8px;">Edit</a>
-                            <a href="" type="submit" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#exampleModal" style="margin-left: 8px;">Hapus</a>
-
+                        <td>{{ $value->pelanggaran }} </td>
+                        {{-- <td>{{ $value->catatan }} </td> --}}
+                        {{-- <td>{{ $value->tgl_pelanggaran }} </td> --}}
+                        {{-- <td>{{ $value->tindakan }} </td> --}}
+                        <td class="d-flex" style="gap: 10px">
+                            <a href="{{ route('pelanggaran.show', $value->id) }}" class="btn btn-sm btn-info" style="margin-left: 8px;">Detail</a>
+                            <a href="{{ route('pelanggaran.edit', $value->id) }}" class="btn btn-sm btn-warning" style="margin-left: 8px;">Edit</a>
+                            <form action="{{ route('pelanggaran.destroy', $value->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger" style="margin-left: 8px;">Hapus</button>
+                            </form>
                         </td>
                     </tr>
                     @endforeach
@@ -92,18 +99,14 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title">Siswa</h5>
+              <h5 class="modal-title">pelanggaran</h5>
             </div>
             <div class="modal-body">
               <p>Anda yakin akan menghapus Data?</p>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button>
-              <form action="{{ route('siswa.destroy', $value->id) }}" method="POST">
-                              @csrf
-                              @method('DELETE')
-                              <button type="submit" class="btn btn-danger" style="margin-left: 8px;">Hapus</button>
-               </form>
+
             </div>
           </div>
         </div>
@@ -150,7 +153,7 @@ $(function () {
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="createModalLabel">Form Add Siswa</h5>
+                <h5 class="modal-title" id="createModalLabel">Form Add pelanggaran</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -168,7 +171,7 @@ $(function () {
                   <div class="alert alert-danger">{{ $message }}</div>
                   @enderror
                   <div class="form-group">
-                    <label for="nama">Nama Siswa</label>
+                    <label for="nama">Nama</label>
                     <input type="text" name="nama" class="form-control @error('nama') is-invalid @enderror" id="nama" placeholder="Enter Nama Anda">
                  </div>
                  @error('nama')
@@ -195,7 +198,7 @@ $(function () {
                       </select>
                       <div class="form-group">
                         <label for="pelanggaran">Nama Pelanggaran</label>
-                        <input type="text" name="pelanggaran" class="form-control @error('pelanggaran') is-invalid @enderror" id="pelanggaran" placeholder="Enter Pelanggaran Siswa">
+                        <input type="text" name="pelanggaran" class="form-control @error('pelanggaran') is-invalid @enderror" id="pelanggaran" placeholder="Enter Pelanggaran pelanggaran">
                      </div>
                      @error('pelanggaran')
                       <div class="alert alert-danger">{{ $message }}</div>
@@ -216,11 +219,14 @@ $(function () {
                       @enderror
                       <div class="form-group">
                         <label for="tindakan">Tindakan</label>
-                        <input type="text" name="tindakan" class="form-control @error('tindakan') is-invalid @enderror" id="tindakan" placeholder="Enter tindakan Siswa">
+                        <input type="text" name="tindakan" class="form-control @error('tindakan') is-invalid @enderror" id="tindakan" placeholder="Enter tindakan pelanggaran">
                      </div>
                      @error('tindakan')
                       <div class="alert alert-danger">{{ $message }}</div>
                      @enderror
+
+                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                     <button type="submit" class="btn btn-primary" onclick="submitForm()">Simpan</button>
                 </div>
                   </div>
             </div>
@@ -228,9 +234,7 @@ $(function () {
     </div>
 </div>
 </form>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                        <button type="submit" class="btn btn-primary" onclick="submitForm()">Simpan</button>
-                  {{-- </div> --}}
+                                 {{-- </div> --}}
               </div>
           </div>
     </div>

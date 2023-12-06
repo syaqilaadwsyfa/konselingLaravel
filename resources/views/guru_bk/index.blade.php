@@ -15,15 +15,15 @@
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
-          <div class="col-sm-6">
+          <div class="col-sm-12 text-center">
             <h1>Data Guru BK</h1>
           </div>
-          <div class="col-sm-6">
+          {{-- <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
               <li class="breadcrumb-item active">Data Guru BK</li>
             </ol>
-          </div>
+          </div> --}}
         </div>
       </div><!-- /.container-fluid -->
     </section>
@@ -39,7 +39,7 @@
                           <i class="fas fa-plus"></i> Add Siswa
                       </a> --}}
                       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createModal">
-                        Tambah Guru BK
+                        Create
                       </button>
                   </div>
                 </div>
@@ -67,13 +67,18 @@
                         <td>{{ $value->no_telp }} </td>
                         {{-- <td>{{ $value->tahun_angkatan }} </td> --}}
                         <td>
+                            <div class="btn-group">
                             <a href="{{ route('guru_bk.show', $value->id) }}" class="btn btn-sm btn-info">Detail</a>
                             <a href="{{ route('guru_bk.edit', $value->id) }}" class="btn btn-sm btn-warning" style="margin-left: 8px;">Edit</a>
                             <form action="{{ route('guru_bk.destroy', $value->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-sm btn-danger" style="margin-left: 8px;">Hapus</button>
-                 </form>
+                                <button type="submit" class="btn btn-sm btn-danger" style="margin-left: 8px;">
+                                    {{-- <i class="nav-icon fas fa-trash"></i> --}}
+                                    Delete
+                                </button>
+                            </form>
+                            <div>
                         </td>
                     </tr>
                     @endforeach
@@ -102,9 +107,15 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button>
+              {{-- <form action="{{ route('guru_bk.destroy', $value->id) }}" method="POST">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn btn-sm btn-danger">Hapus</button>
+            </form> --}}
             </div>
           </div>
         </div>
+    </div>
 @endsection
 @push('script')
 <!-- DataTables  & Plugins -->

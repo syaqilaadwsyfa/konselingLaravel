@@ -94,8 +94,20 @@
           <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
         </div>
       </li> --}}
+
+      {{-- coba aja --}}
+
+      <div class="user-panel mt-1 pb-1 mb-1 d-flex">
+        <div class="image">
+          <img src="{{ asset('adminlte/dist/img/avatar2.png') }}" class="img-circle elevation-2" alt="User Image">
+        </div>
+        <div class="info">
+          <a href="#" class="d-block">Admin</a>
+        </div>
+      </div>
+
       <!-- Notifications Dropdown Menu -->
-      <li class="nav-item dropdown">
+      {{-- <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
           <i class="fas fa-bell"></i>
           <span class="badge badge-warning navbar-badge">15</span>
@@ -120,7 +132,10 @@
           <div class="dropdown-divider"></div>
           <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
         </div>
-      </li>
+      </li> --}}
+
+      {{-- sampe sini --}}
+
       {{-- <li class="nav-item">
         <a class="nav-link" data-widget="fullscreen" href="#" role="button">
           <i class="fas fa-expand-arrows-alt"></i>
@@ -161,7 +176,7 @@
         </ul>
       </div> --}}
       <!-- Avatar -->
-      <div class="dropdown">
+      {{-- <div class="dropdown">
         <a
           class="dropdown-toggle d-flex align-items-center hidden-arrow"
           href="#"
@@ -189,7 +204,7 @@
           </li>
           <li>
             <a class="dropdown-item" href="#">Logout</a>
-    </ul>
+    </ul> --}}
   </nav>
 
 

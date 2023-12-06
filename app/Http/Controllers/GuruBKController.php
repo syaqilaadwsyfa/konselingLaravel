@@ -13,7 +13,7 @@ class GuruBKController extends Controller
      */
     public function index()
     {
-        $guru_bks = DB::table ('guru_bks') ->get();
+        $guru_bks = Guru_BK::all();
         return view('guru_bk.index', compact('guru_bks'));
     }
 
