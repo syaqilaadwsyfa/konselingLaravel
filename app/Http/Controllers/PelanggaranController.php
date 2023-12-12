@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Guru_BK;
 use App\Models\Pelanggaran;
+use App\Models\Siswa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -14,7 +16,15 @@ class PelanggaranController extends Controller
     public function index()
     {
         $pelanggarans = Pelanggaran::all();
-        return view('pelanggaran.index', compact('pelanggarans'));
+        $guru_bk = Guru_BK::all();
+        $siswas = Siswa::all();
+        return view('pelanggaran.index', compact('pelanggarans', 'guru_bk', 'siswas'));
+    }
+
+    public function exportPdf()
+    {
+        $pelanggarans = Pelanggaran::get_cfg_var();
+        return view('pelanggaran.exportPdf', compact('pelanggarans'));
     }
 
     /**
@@ -24,6 +34,7 @@ class PelanggaranController extends Controller
     {
         $request->validate([
             'siswa_id'          =>  'required',
+            'guruBk_id'          =>  'required',
             'pelanggaran'       =>  'required',
             'catatan'           =>  'required',
             'tgl_pelanggaran'   =>  'required',

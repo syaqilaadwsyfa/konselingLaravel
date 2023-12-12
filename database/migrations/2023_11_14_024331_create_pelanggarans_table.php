@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('siswa_id');
             $table->foreign('siswa_id')->references('id')->on('siswas');
+            $table->foreignId('guruBk_id')->constrained('guru_bks');
             $table->string('pelanggaran', 45);
             $table->string('catatan', 100);
             $table->date('tgl_pelanggaran');

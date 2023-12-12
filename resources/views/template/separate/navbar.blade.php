@@ -95,16 +95,48 @@
         </div>
       </li> --}}
 
-      {{-- coba aja --}}
+      {{-- COBA AJA --}}
 
-      <div class="user-panel mt-1 pb-1 mb-1 d-flex">
+      {{-- <div class="user-panel mt-1 pb-1 mb-1 d-flex">
         <div class="image">
           <img src="{{ asset('adminlte/dist/img/avatar2.png') }}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
           <a href="#" class="d-block">Admin</a>
         </div>
-      </div>
+      </div> --}}
+
+
+      {{-- SEFIA --}}
+      <li class="nav-item dropdown">
+        <a class="nav-link" data-toggle="dropdown" href="#">
+            <i class="far fa-user-circle"></i>
+        </a>
+        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+            <span class="dropdown-item dropdown-header">Profil</span>
+            <div class="dropdown-divider"></div>
+            <a href="{{ route('auth.logout') }}" method="post" class="dropdown-item">
+                @csrf
+                <i class="fas fa-sign-out-alt mr-2"></i> Logout
+            </a>
+        </div>
+    </li>
+
+
+    {{-- <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <img src="{{ asset('AdminLTE/dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
+        </div>
+        <div class="info">
+          <a href="{{ route('user.profile', Auth::user()->id) }}" class="d-block">{{ Auth::user()->name }}</a>
+        </div>
+      </div> --}}
+
+    {{-- <form action="{{ route('logout') }}" method="post">
+        @csrf
+        <!-- Gunakan elemen input sebagai ganti tombol -->
+        <input type="submit" value="Logout">
+    </form> --}}
 
       <!-- Notifications Dropdown Menu -->
       {{-- <li class="nav-item dropdown">

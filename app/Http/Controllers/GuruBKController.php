@@ -50,18 +50,16 @@ class GuruBKController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Guru_BK $guru_BK)
+    public function show(Guru_BK $guru_bk)
     {
-        $guru_bk = DB::table ('guru_bks') ->get();
         return view('guru_bk.show', compact('guru_bk'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Guru_BK $guru_BK)
+    public function edit(Guru_BK $guru_bk)
     {
-        $guru_bk = DB::table ('guru_bks') ->get();
         return view('guru_bk.edit', compact('guru_bk'));
     }
 

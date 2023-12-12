@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Siswa;
+use App\Models\Kelas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -16,7 +17,8 @@ class SiswaController extends Controller
     public function index()
     {
         $siswas = Siswa::all();
-        return view('siswa.index', compact('siswas'));
+        $kelases = Kelas::all();
+        return view('siswa.index', compact('siswas', 'kelases'));
     }
 
     /**
@@ -33,16 +35,17 @@ class SiswaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nis'               =>  'required|numeric',
+            'nis'               =>  'required',
             'nama'              =>  'required',
             'alamat'            =>  'required',
-            'kelas'             =>  'required',
+            'kelas_id'             =>  'required',
             'tgl_lahir'         =>  'required',
             'jenis_kelamin'     =>  'required',
             'no_telp_ortu'      =>  'required',
             'agama'             =>  'required',
-            'tahun_angkatan'    =>  'required|numeric'
+            'tahun_angkatan'    =>  'required'
         ]);
+        // dd($request);
 
         Siswa::create($request->all());
 
@@ -76,7 +79,8 @@ class SiswaController extends Controller
     public function edit(Siswa $siswa)
     {
         // $siswas = DB::table('siswas')->where('id', $id)->get();
-        return view('siswa.edit', compact('siswa'));
+        $kelas = Kelas::all();
+        return view('siswa.edit', compact('siswa', 'kelas'));
     }
 
     /**
@@ -88,7 +92,7 @@ class SiswaController extends Controller
             'nis'               =>  'required|numeric',
             'nama'              =>  'required',
             'alamat'            =>  'required',
-            'kelas'             =>  'required',
+            'nama_kelas'             =>  'required',
             'tgl_lahir'         =>  'required',
             'jenis_kelamin'     =>  'required',
             'no_telp_ortu'      =>  'required',
@@ -96,11 +100,12 @@ class SiswaController extends Controller
             'tahun_angkatan'    =>  'required|numeric'
         ]);
 
+
         $query = DB::table('siswas')->where('id', $id)->update([
             'nis'               =>  $request['nis'],
             'nama'              =>  $request['nama'],
             'alamat'            =>  $request['alamat'],
-            'kelas'             =>  $request['kelas'],
+            'kelas_id'             =>  $request['nama_kelas'],
             'tgl_lahir'         =>  $request['tgl_lahir'],
             'jenis_kelamin'     =>  $request['jenis_kelamin'],
             'no_telp_ortu'      =>  $request['no_telp_ortu'],

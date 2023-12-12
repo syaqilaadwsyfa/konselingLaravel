@@ -64,20 +64,26 @@
                         <td>{{ $value->nis }} </td>
                         <td>{{ $value->nama }} </td>
                         {{-- <td>{{ $value->alamat }} </td> --}}
-                        <td>{{ $value->kelas }} </td>
+                        @forelse ($value->kelas as $kelas)
+                        <td>
+                            {{ $kelas->nama_kelas }}
+                        </td>
+                        @empty
+                            hooh
+                        @endforelse
                         {{-- <td>{{ $value->tahun_angkatan }} </td> --}}
-                            <td class="d-flex" style="gap: 10px">
+                        <td class="d-flex align-items-center" style="gap: 10px">
                             <a href="{{ route('siswa.show', $value->id) }}" class="btn btn-sm btn-info">Detail</a>
                             <a href="{{ route('siswa.edit', $value->id) }}" class="btn btn-sm btn-warning" style="margin-left: 8px;">Edit</a>
                             <form action="{{ route('siswa.destroy', $value->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-sm btn-danger" style="margin-left: 8px;">
+                                <button type="submit" class="btn btn-sm btn-danger" style="margin-left: 8px; margin-top: 15px;">
                                     {{-- <i class="nav-icon fas fa-trash"></i> --}}
                                     Delete
                                 </button>
                             </form>
-                            </td>
+                        </td>
                         </tr>
                     @endforeach
                   </tbody>
@@ -227,26 +233,20 @@ $(function () {
                         @error('alamat')
                         <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
-                        <div class="form-group">
-                          <label>Kelas</label>
-                          <select type="text" name="kelas" class="form-control">
-                              <option disabled selected>Pilih Kelas</option>
-                              <option value="X RPL 1">X RPL 1</option>
-                              <option value="X RPL 2">X RPL 2</option>
-                              <option value="XI RPL 1">XI RPL 1</option>
-                              <option value="XI RPL 2">XI RPL 2</option>
-                              <option value="XII RPL 1">XII RPL 1</option>
-                              <option value="XII RPL 2">XII RPL 2</option>
-                              <option value="X TKJ 1">X TKJ 1</option>
-                              <option value="X TKJ 2">X TKJ 2</option>
-                              <option value="XI TKJ 1">XI TKJ 1</option>
-                              <option value="XI TKJ 2">XI TKJ 2</option>
-                              <option value="XII TKJ 1">XII TKJ 1</option>
-                              <option value="XII TKJ 2">XII TKJ 2</option>
-                              <option value="X DPIB 1">X DPIB 1</option>
-                              <option value="X DPIB 2">X DPIB 2</option>
+                        <div class="mb-2">
+                            <label for="kelas">Kelas</label>
+                            <select name="kelas_id" id="kelas" class="form-control @error('kelas') is-invalid @enderror">
+                                <option disabled selected>--Pilih Salah Satu--</option>
+                                @forelse ($kelases as $key => $value)
+                                    <option value="{{ $value->id }}">{{ $value->nama_kelas }}</option>
+                                @empty
+                                    <option disabled>--Data Masih Kosong--</option>
+                                @endforelse
                             </select>
                         </div>
+                        @error('kelas')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                         {{-- <div class="form-group">
                           <label for="kelas">Kelas</label>
                           <input type="text" name="kelas" class="form-control @error('kelas') is-invalid @enderror" id="kelas" placeholder="Enter Kelas Anda">
@@ -265,8 +265,8 @@ $(function () {
                           <label>Jenis Kelamin</label>
                           <select type="text" name="jenis_kelamin" class="form-control">
                               <option disabled selected>Pilih Jenis Kelamin</option>
-                              <option value="Laki-laki">Laki-laki</option>
-                              <option value="Perempuan">Perempuan</option>
+                              <option value="laki-laki">Laki-laki</option>
+                              <option value="perempuan">Perempuan</option>
                             </select>
                         </div>
                         <div class="form-group">

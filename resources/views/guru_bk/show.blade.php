@@ -7,7 +7,7 @@
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
-          <div class="col-sm-6">
+          {{-- <div class="col-sm-6">
             <h1>General Form</h1>
           </div>
           <div class="col-sm-6">
@@ -15,7 +15,7 @@
               <li class="breadcrumb-item"><a href="#">Home</a></li>
               <li class="breadcrumb-item active">General Form</li>
             </ol>
-          </div>
+          </div> --}}
         </div>
       </div><!-- /.container-fluid -->
     </section>
@@ -36,15 +36,15 @@
               <div class="card-body">
                 <div class="form-group">
                     <label for="nip">NIP</label>
-                    <input type="number" name="nip" class="form-control" value="{{ $guru_bk->first()->nip }}" disabled>
+                    <input type="number" name="nip" class="form-control" value="{{ $guru_bk->nip }}" disabled>
                   </div>
                   <div class="form-group">
                     <label for="nama">Nama</label>
-                    <input type="text" name="nama" class="form-control" value="{{ $guru_bk->first()->nama }}" disabled>
+                    <input type="text" name="nama" class="form-control" value="{{ $guru_bk->nama }}" disabled>
                   </div>
                   <div class="form-group">
                     <label for="alamat">No Telepon</label>
-                    <input type="number" name="no_telp" class="form-control" value="{{ $guru_bk->first()->no_telp }}" disabled>
+                    <input type="number" name="no_telp" class="form-control" value="{{ $guru_bk->no_telp }}" disabled>
                   </div>
 
                 <a href="" class="btn btn-secondary" style="margin-left: 8px;" data-toggle="modal" data-target="#exampleModal">Back</a>
@@ -71,10 +71,10 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Detail Siswa</h5>
+          <h5 class="modal-title">Detail Guru BK</h5>
         </div>
         <div class="modal-body">
-          <p>Anda yakin akan kembali ke halaman Data Siswa?</p>
+          <p>Anda yakin akan kembali ke halaman Data Guru BK?</p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button>

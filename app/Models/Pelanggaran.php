@@ -12,6 +12,7 @@ class Pelanggaran extends Model
     protected $table    = 'pelanggarans';
     protected $fillable =  [
         'siswa_id',
+        'guruBk_id',
         'pelanggaran',
         'catatan',
         'tgl_pelanggaran',
@@ -19,6 +20,6 @@ class Pelanggaran extends Model
     ];
 
     public function siswa() {
-        return $this->belongsTo(Siswa::class, 'id', 'siswa_id');
+        return $this->belongsTo(Siswa::class, 'siswa_id', 'id');
     }
 }

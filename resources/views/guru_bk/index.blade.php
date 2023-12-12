@@ -66,25 +66,23 @@
                         {{-- <td>{{ $value->alamat }} </td> --}}
                         <td>{{ $value->no_telp }} </td>
                         {{-- <td>{{ $value->tahun_angkatan }} </td> --}}
-                        <td>
-                            <div class="btn-group">
+                        <td class="d-flex align-items-center" style="gap: 10px">
                             <a href="{{ route('guru_bk.show', $value->id) }}" class="btn btn-sm btn-info">Detail</a>
                             <a href="{{ route('guru_bk.edit', $value->id) }}" class="btn btn-sm btn-warning" style="margin-left: 8px;">Edit</a>
                             <form action="{{ route('guru_bk.destroy', $value->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-sm btn-danger" style="margin-left: 8px;">
+                                <button type="submit" class="btn btn-sm btn-danger" style="margin-left: 8px; margin-top: 15px;">
                                     {{-- <i class="nav-icon fas fa-trash"></i> --}}
                                     Delete
                                 </button>
                             </form>
-                            <div>
                         </td>
                     </tr>
                     @endforeach
                   </tbody>
                 </table>
-              </div>
+              {{-- </div> --}}
               <!-- /.card-body -->
             </div>
             <!-- /.card -->

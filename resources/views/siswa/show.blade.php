@@ -48,7 +48,10 @@
                   </div>
                   <div class="form-group">
                     <label for="kelas">Kelas</label>
-                    <input type="text" name="kelas" class="form-control" value="{{ $siswa->kelas }}" disabled>
+                    <input type="text" name="kelas" class="form-control" value="@forelse ($siswa->kelas as $kelas){{ $kelas->nama_kelas }}
+                    @empty
+                        hooh
+                    @endforelse" disabled>
                   </div>
                   <div class="form-group">
                     <label for="tgl_lahir">Tanggal Lahir</label>
@@ -56,7 +59,7 @@
                   </div>
                 <div class="form-group">
                   <label for="jenis_kelamin">Jenis Kelamin</label>
-                  <input type="text" name="jenis_kelamin" class="form-control" id="jenis_kelamin" value="@if ($siswa->jenis_kelamin == "L")Laki-laki
+                  <input type="text" name="jenis_kelamin" class="form-control" id="jenis_kelamin" value="@if ($siswa->jenis_kelamin == 'laki-laki')Laki-laki
                       @else Perempuan
                   @endif" disabled>
                 </div>

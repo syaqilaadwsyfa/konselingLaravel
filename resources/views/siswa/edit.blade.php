@@ -59,6 +59,24 @@
                     @enderror
                     <div class="form-group">
                         <label for="kelas">Kelas</label>
+                        <select name="nama_kelas" id="kelas"
+                            class="form-control @error('kelas') is-invalid @enderror">
+                            <option disabled selected>--Pilih Salah Satu--</option>
+                            @forelse ($kelas as $value)
+                                <option value="{{ $value->id }}"
+                                    {{ $value->id == $siswa->kelas_id ? 'selected' : '' }}>
+                                    {{ $value->nama_kelas }}
+                                </option>
+                            @empty
+                                <option disabled>--Data Masih Kosong--</option>
+                            @endforelse
+                        </select>
+                    </div>
+                    @error('kelas')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                    {{-- <div class="form-group">
+                        <label for="kelas">Kelas</label>
                           <select name="kelas" id="kelas" class="form-control @error('kelas') is-invalid @enderror" value="{{ $siswa->kelas }}">
                           <option value="X RPL 1" @if($siswa->kelas == 'X RPL 1') selected @endif>X RPL 1</option>
                           <option value="X RPL 2" @if($siswa->kelas == 'X RPL 2') selected @endif>X RPL 1</option>
@@ -78,7 +96,7 @@
                         </div>
                   @error('kelas')
                       <div class="alert alert-danger">{{ $message }}</div>
-                  @enderror
+                  @enderror --}}
                   <div class="form-group">
                     <label for="tgl_lahir">Tanggal Lahir</label>
                     <input type="date" name="tgl_lahir" id="tgl_lahir" class="form-control @error('tgl_lahir') is-invalid @enderror" value="{{$siswa->tgl_lahir}}">

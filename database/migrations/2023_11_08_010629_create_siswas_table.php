@@ -16,7 +16,8 @@ return new class extends Migration
             $table->integer('nis');
             $table->string('nama', 45);
             $table->text('alamat');
-            $table->string('kelas', 45);
+            $table->foreignId('kelas_id')->constrained('kelas');
+            // $table->string('kelas', 45);
             $table->date('tgl_lahir');
             $table->string('jenis_kelamin', 45);
             $table->char('no_telp_ortu', 15);

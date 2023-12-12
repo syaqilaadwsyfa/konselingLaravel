@@ -79,7 +79,21 @@
                   @error('alamat')
                   <div class="alert alert-danger">{{ $message }}</div>
                   @enderror
-                  <div class="form-group">
+                  <div class="mb-2">
+                    <label for="kelas">Kelas</label>
+                    <select name="kelas" id="kelas" class="form-control @error('kelas') is-invalid @enderror">
+                        <option disabled selected>--Pilih Salah Satu--</option>
+                        @forelse ($kelas as $key => $value)
+                            <option value="{{ $value->id }}">{{ $value->kelas }}</option>
+                        @empty
+                            <option disabled>--Data Masih Kosong--</option>
+                        @endforelse
+                    </select>
+                </div>
+                @error('kelas')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
+                  {{-- <div class="form-group">
                     <label>Kelas</label>
                     <select type="text" name="kelas" class="form-control">
                         <option disabled selected>Pilih Kelas</option>
@@ -98,14 +112,7 @@
                         <option value="X DPIB 1">X DPIB 1</option>
                         <option value="X DPIB 2">X DPIB 2</option>
                       </select>
-                  </div>
-                  {{-- <div class="form-group">
-                    <label for="kelas">Kelas</label>
-                    <input type="text" name="kelas" class="form-control @error('kelas') is-invalid @enderror" id="kelas" placeholder="Enter Kelas Anda">
                   </div> --}}
-                  {{-- @error('kelas')
-                  <div class="alert alert-danger">{{ $message }}</div>
-                  @enderror --}}
                   <div class="form-group">
                     <label for="no_telp_ortu">No Telepon Orangtua</label>
                     <input type="number" name="no_telp_ortu" class="form-control @error('no_telp_ortu') is-invalid @enderror" id="no_telp_ortu" placeholder="Enter No Telp Orangtua Anda">
@@ -144,11 +151,9 @@
                   @enderror
             </div>
         </div>
-    </div>
-
+           </div>
                 </div>
                 <!-- /.card-body -->
-
                 <div class="card-footer">
                     <button type="submit" class="btn btn-primary">Submit</button>
                     <a href="" class="btn btn-secondary" style="margin-left: 8px;" data-toggle="modal" data-target="#exampleModal">Kembali</a>

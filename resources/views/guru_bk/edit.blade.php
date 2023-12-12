@@ -38,21 +38,21 @@
               <div class="card-body">
                 <div class="form-group">
                   <label for="nip">Nip</label>
-                  <input type="number" name="nip" id="nip" class="form-control @error('nip') is-invalid @enderror" value="{{$siswa->nip}}">
+                  <input type="number" name="nip" id="nip" class="form-control @error('nip') is-invalid @enderror" value="{{$guru_bk->nip}}">
                 </div>
                 @error('nip')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
                 <div class="form-group">
                   <label for="nama">Nama</label>
-                  <input type="text" name="nama" id="nama" class="form-control @error('nama') is-invalid @enderror" value="{{$siswa->nama}}">
+                  <input type="text" name="nama" id="nama" class="form-control @error('nama') is-invalid @enderror" value="{{$guru_bk->nama}}">
                 </div>
                 @error('nama')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
                   <div class="form-group">
                     <label for="no_telp">No Telp</label>
-                    <input type="nummber" name="no_telp" id="no_telp" class="form-control @error('no_telp') is-invalid @enderror" value="{{$siswa->no_telp}}">
+                    <input type="nummber" name="no_telp" id="no_telp" class="form-control @error('no_telp') is-invalid @enderror" value="{{$guru_bk->no_telp}}">
                   </div>
                   @error('no_telp')
                       <div class="alert alert-danger">{{ $message }}</div>

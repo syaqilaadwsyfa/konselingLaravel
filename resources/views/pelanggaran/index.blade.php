@@ -15,15 +15,15 @@
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1>Data pelanggaran</h1>
-          </div>
-          <div class="col-sm-6">
+            <div class="col-sm-12 text-center">
+                <h1>Data Pelanggaran</h1>
+            </div>
+          {{-- <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
               <li class="breadcrumb-item active">DataTables</li>
             </ol>
-          </div>
+          </div> --}}
         </div>
       </div><!-- /.container-fluid -->
     </section>
@@ -39,8 +39,11 @@
                           <i class="fas fa-plus"></i> Add pelanggaran
                       </a> --}}
                       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createModal">
-                          Tambah pelanggaran
+                        <i class="fas fa-plus pe-5"></i>Create
                       </button>
+                      <button type="button" class="btn btn-success" data-toggle="modal" data-target="#createModal">
+                        <i class="fas fa-print pe-2"></i>Export PDF
+                    </button>
                   </div>
                   </div>
               <!-- /.card-header -->
@@ -51,8 +54,8 @@
                     <th>No</th>
                     <th>NIS</th>
                     <th>Nama</th>
-                    <th>Pelanggaran</th>
                     <th>Kelas</th>
+                    <th>Pelanggaran</th>
                     {{-- <th>Catatan</th>
                     <th>Tgl Pelanggaran</th>
                     <th>Tindakan</th> --}}
@@ -63,9 +66,14 @@
                     @foreach($pelanggarans as $key => $value)
                     <tr>
                         <td>{{ $key +1 }} </td>
-                        <td>{{ $value->nis }} </td>
-                        <td>{{ $value->nama }} </td>
-                        <td>{{ $value->kelas }} </td>
+                        @forelse ($value->siswa as $siswa)
+                        {{ dd($siswa) }}
+                        <td>{{ $siswa->nis }} </td>
+                        <td>{{ $siswa->nama }} </td>
+                        <td>{{ $siswa->kelas }} </td>
+                        @empty
+                            hooh
+                        @endforelse
                         <td>{{ $value->pelanggaran }} </td>
                         {{-- <td>{{ $value->catatan }} </td> --}}
                         {{-- <td>{{ $value->tgl_pelanggaran }} </td> --}}
@@ -78,6 +86,9 @@
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger" style="margin-left: 8px;">Hapus</button>
                             </form>
+                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#createModal">
+                                <i class="fas fa-print pe-2"></i>Export PDF
+                            </button>
                         </td>
                     </tr>
                     @endforeach
@@ -163,7 +174,7 @@ $(function () {
             <form action="{{ route('pelanggaran.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="card-body">
-                  <div class="form-group">
+                  {{-- <div class="form-group">
                     <label for="nis">NIS</label>
                     <input type="number" name="nis" class="form-control @error('nis') is-invalid @enderror" id="nis" placeholder="Enter Nis Anda">
                   </div>
@@ -177,25 +188,35 @@ $(function () {
                  @error('nama')
                   <div class="alert alert-danger">{{ $message }}</div>
                  @enderror
-                  <div class="form-group">
-                    <label>Kelas</label>
-                    <select type="text" name="kelas" class="form-control">
-                        <option disabled selected>Pilih Kelas</option>
-                        <option value="X RPL 1">X RPL 1</option>
-                        <option value="X RPL 2">X RPL 2</option>
-                        <option value="X RPL 1">XI RPL 1</option>
-                        <option value="X RPL 2">XI RPL 2</option>
-                        <option value="X RPL 1">XII RPL 1</option>
-                        <option value="X RPL 2">XII RPL 2</option>
-                        <option value="X TKJ 1">X TKJ 1</option>
-                        <option value="X TKJ 2">X TKJ 2</option>
-                        <option value="X TKJ 1">XI TKJ 1</option>
-                        <option value="X TKJ 2">XI TKJ 2</option>
-                        <option value="X TKJ 1">XII TKJ 1</option>
-                        <option value="X TKJ 2">XII TKJ 2</option>
-                        <option value="X DPIB 1">X DPIB 1</option>
-                        <option value="X DPIB 2">X DPIB 2</option>
-                      </select>
+                 <div class="mb-2">
+                    <label for="kelas">Kelas</label>
+                    <select name="kelas_id" id="kelas" class="form-control @error('kelas') is-invalid @enderror">
+                        <option disabled selected>--Pilih Salah Satu--</option>
+                        @forelse ($kelases as $key => $value)
+                            <option value="{{ $value->id }}">{{ $value->nama_kelas }}</option>
+                        @empty
+                            <option disabled>--Data Masih Kosong--</option>
+                        @endforelse
+                    </select>
+                </div> --}}
+                      <div class="form-group">
+                        <label for="siswa_id">Nama Siswa</label>
+                        <select name="siswa_id" id="siswa_id" class="form-control @error('siswa_id') is-invalid @enderror">
+                            <option disabled selected>--Pilih Salah Satu--</option>
+                            @foreach ($siswas as $siswa)
+                            <option value="{{ $siswa->id }}">{{ $siswa->nama }}</option>
+                            @endforeach
+                        </select>
+                     </div>
+                      <div class="form-group">
+                        <label for="guruBk_id">Nama Guru BK</label>
+                        <select name="guruBk_id" id="guruBk_id" class="form-control @error('guruBk_id') is-invalid @enderror">
+                            <option disabled selected>--Pilih Salah Satu--</option>
+                            @foreach ($guru_bk as $guru_bk)
+                            <option value="{{ $guru_bk->id }}">{{ $guru_bk->nama }}</option>
+                            @endforeach
+                        </select>
+                     </div>
                       <div class="form-group">
                         <label for="pelanggaran">Nama Pelanggaran</label>
                         <input type="text" name="pelanggaran" class="form-control @error('pelanggaran') is-invalid @enderror" id="pelanggaran" placeholder="Enter Pelanggaran pelanggaran">
@@ -227,7 +248,7 @@ $(function () {
 
                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
                      <button type="submit" class="btn btn-primary" onclick="submitForm()">Simpan</button>
-                </div>
+
                   </div>
             </div>
         </div>

@@ -2,7 +2,7 @@
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link">
       <img src="{{ asset('adminlte/dist/img/rpl.jpg') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">E-Counseling</span>
+      <span class="brand-text font-weight-light; color:black">B-Kita</span>
     </a>
 
     <!-- Sidebar -->
@@ -50,6 +50,7 @@
               {{-- </p>
             </a>
           </li> --}}
+          {{-- @can('isAdmin') --}}
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
@@ -64,28 +65,36 @@
                       <i class="far fa-circle nav-icon"></i>
                       <p>Admin</p>
                     </a>
-                  </li> --}}
-              <li class="nav-item">
-                <a href="{{ asset('guru_bk') }}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Guru BK</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{ asset('siswa') }}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Siswa</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/mailbox/read-mail.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Kelas</p>
-                </a>
-              </li>
+                </li> --}}
+
+                {{-- @can('isAdmin') --}}
+                <li class="nav-item">
+                  <a href="{{ route('guru_bk.index') }}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Guru BK</p>
+                  </a>
+                </li>
+            {{-- @endcan
+            @cannot('isSiswa') --}}
+            <li class="nav-item">
+              <a href="{{ route('siswa.index') }}" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Siswa</p>
+              </a>
+            </li>
+            {{-- @endcannot
+            @can('isAdmin') --}}
+            <li class="nav-item">
+              <a href="{{ route('kelas.index') }}" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Kelas</p>
+              </a>
+            </li>
+            {{-- @endcan --}}
             </ul>
           </li>
-                    <li class="nav-item">
+          {{-- @endcan --}}
+        <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-share"></i>
               <p>
