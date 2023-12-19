@@ -18,12 +18,6 @@
             <div class="col-sm-12 text-center">
                 <h1>Data Pelanggaran</h1>
             </div>
-          {{-- <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">DataTables</li>
-            </ol>
-          </div> --}}
         </div>
       </div><!-- /.container-fluid -->
     </section>
@@ -35,15 +29,12 @@
               <div class="card">
                 <div class="card-header">
                   <div class="col text-right">
-                      {{-- <a href="{{ route('pelanggaran.create') }}" class="btn btn-sm btn-primary">
-                          <i class="fas fa-plus"></i> Add pelanggaran
-                      </a> --}}
                       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createModal">
                         <i class="fas fa-plus pe-5"></i>Create
                       </button>
-                      <button type="button" class="btn btn-success" data-toggle="modal" data-target="#createModal">
+                      <a href="{{ route('exportPdf') }}" target="_blank" class="btn btn-success">
                         <i class="fas fa-print pe-2"></i>Export PDF
-                    </button>
+                      </a>
                   </div>
                   </div>
               <!-- /.card-header -->
@@ -56,9 +47,6 @@
                     <th>Nama</th>
                     <th>Kelas</th>
                     <th>Pelanggaran</th>
-                    {{-- <th>Catatan</th>
-                    <th>Tgl Pelanggaran</th>
-                    <th>Tindakan</th> --}}
                     <th>Action</th>
                   </tr>
                   </thead>
@@ -67,10 +55,13 @@
                     <tr>
                         <td>{{ $key +1 }} </td>
                         @forelse ($value->siswa as $siswa)
-                        {{ dd($siswa) }}
                         <td>{{ $siswa->nis }} </td>
                         <td>{{ $siswa->nama }} </td>
-                        <td>{{ $siswa->kelas }} </td>
+                        <td>@forelse ($siswa->kelas as $kelas)
+                            {{ $kelas->nama_kelas }}
+                        @empty
+                            hooh
+                        @endforelse</td>
                         @empty
                             hooh
                         @endforelse
@@ -78,17 +69,14 @@
                         {{-- <td>{{ $value->catatan }} </td> --}}
                         {{-- <td>{{ $value->tgl_pelanggaran }} </td> --}}
                         {{-- <td>{{ $value->tindakan }} </td> --}}
-                        <td class="d-flex" style="gap: 10px">
+                        <td class="d-flex align-items-center" style="gap: 10px">
                             <a href="{{ route('pelanggaran.show', $value->id) }}" class="btn btn-sm btn-info" style="margin-left: 8px;">Detail</a>
                             <a href="{{ route('pelanggaran.edit', $value->id) }}" class="btn btn-sm btn-warning" style="margin-left: 8px;">Edit</a>
                             <form action="{{ route('pelanggaran.destroy', $value->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger" style="margin-left: 8px;">Hapus</button>
+                                <button type="submit" class="btn btn-sm btn-danger mt-3" style="margin-left: 8px;">Hapus</button>
                             </form>
-                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#createModal">
-                                <i class="fas fa-print pe-2"></i>Export PDF
-                            </button>
                         </td>
                     </tr>
                     @endforeach

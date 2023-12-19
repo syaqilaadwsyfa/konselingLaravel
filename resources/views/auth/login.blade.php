@@ -19,7 +19,7 @@
   <!-- /.login-logo -->
   <div class="card card-outline card-primary">
     <div class="card-header text-center">
-      <a href="{{ asset('AdminLTE/index2.html') }}" class="h1"><b>E-Counseling</b></a>
+      <a href="{{ asset('AdminLTE/index2.html') }}" class="h1"><b>B-Kita</b></a>
     </div>
     <div class="card-body">
       <form action="{{ route('auth.authentication') }}" method="post">

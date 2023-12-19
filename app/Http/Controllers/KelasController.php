@@ -33,11 +33,11 @@ class KelasController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'kelas' => 'required',
+            'nama_kelas' => 'required',
         ]);
 
         $query = DB::table('kelas')->insert([
-            'kelas' => $request['kelas'],
+            'nama_kelas' => $request['nama_kelas'],
         ]);
 
         return redirect()->route('kelas.index');
