@@ -132,12 +132,12 @@
                   <p>Data Pelanggaran</p>
                 </a>
               </li>
-              <li class="nav-item">
+              {{-- <li class="nav-item">
                 <a href="{{ asset(' ') }}" class="nav-link">
                   <i class="fa fa-print nav-icon"></i>
                   <p>Laporan</p>
                 </a>
-              </li>
+              </li> --}}
             </ul>
           </li>
         </ul>

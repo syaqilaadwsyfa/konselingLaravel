@@ -6,8 +6,7 @@ use App\Http\Controllers\GuruBKController;
 use App\Http\Controllers\PelanggaranController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\AuthController;
-
-
+use App\Http\Controllers\PdfController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,7 +37,7 @@ Route::controller(AuthController::class)->group(function() {
     Route::get('/login', 'login')->name('auth.login');
     Route::post('/auth', 'authentication')->name('auth.authentication');
     Route::get('/dashboard', 'dashboard')->name('auth.dashboard');
-    Route::post('/logout', 'logout')->name('auth.logout');
+    Route::get('/logout', 'logout')->name('auth.logout');
 });
 
-Route::get('exportPdf', 'PelanggaranController@exportPdf')->name('exportPdf');
+Route::get('exportPdf', [PdfController::class, 'exportPdf'])->name('exportPdf');
