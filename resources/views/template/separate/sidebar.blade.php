@@ -1,56 +1,26 @@
 <aside class="main-sidebar sidebar-light-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
-      <img src="{{ asset('adminlte/dist/img/rpl.jpg') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light; color:black">B-Kita</span>
+    <a href="{{ route('auth.dashboard') }}" class="brand-link">
+      <img src="{{ asset('adminlte/dist/img/rpl.jpg') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3">
+      <span class="brand-text text-black font-weight-semibold">B-Kita</span>
     </a>
 
     <!-- Sidebar -->
     <div class="sidebar">
-      <!-- Sidebar user panel (optional) -->
-      {{-- <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="image">
-          <img src="{{ asset('adminlte/dist/img/avatar2.png') }}" class="img-circle elevation-2" alt="User Image">
-        </div>
-        <div class="info">
-          <a href="#" class="d-block">Guru BK</a>
-        </div>
-      </div> --}}
-
-      <!-- SidebarSearch Form -->
-      {{-- <div class="form-inline">
-        <div class="input-group" data-widget="sidebar-search">
-          <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
-          <div class="input-group-append">
-            <button class="btn btn-sidebar">
-              <i class="fas fa-search fa-fw"></i>
-            </button>
-          </div>
-        </div>
-      </div> --}}
-
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item">
-            <a href="{{ asset('dashboard') }}" class="nav-link">
+            <a href="{{ route('auth.dashboard') }}" class="nav-link @if (Request::segment(1) == '')
+                active
+            @endif">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
-                {{-- <span class="right badge badge-danger">New</span> --}}
               </p>
             </a>
           </li>
-          {{-- <li class="nav-item">
-            <a href="pages/widgets.html" class="nav-link">
-              <i class="nav-icon fas fa-user"></i>
-              <p> --}}
-                {{-- Akun Non-Aktif --}}
-                {{-- <span class="right badge badge-danger">New</span> --}}
-              {{-- </p>
-            </a>
-          </li> --}}
-          {{-- @can('isAdmin') --}}
+          @can('isAdmin')
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
@@ -60,42 +30,43 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
-                {{-- <li class="nav-item">
-                    <a href="pages/mailbox/mailbox.html" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Admin</p>
-                    </a>
-                </li> --}}
-
-                {{-- @can('isAdmin') --}}
+                @can('isAdmin')
                 <li class="nav-item">
-                  <a href="{{ route('guru_bk.index') }}" class="nav-link">
+                  <a href="{{ route('guru_bk.index') }}" class="nav-link @if (Request::segment(1) == 'guru_bk')
+                      active
+                  @endif">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Guru BK</p>
                   </a>
                 </li>
-            {{-- @endcan
-            @cannot('isSiswa') --}}
-            <li class="nav-item">
-              <a href="{{ route('siswa.index') }}" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Siswa</p>
-              </a>
-            </li>
-            {{-- @endcannot
-            @can('isAdmin') --}}
-            <li class="nav-item">
-              <a href="{{ route('kelas.index') }}" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Kelas</p>
-              </a>
-            </li>
-            {{-- @endcan --}}
+                @endcan
+                @cannot('isSiswa')
+                <li class="nav-item">
+                    <a href="{{ route('siswa.index') }}" class="nav-link @if (Request::segment(1) == 'siswa')
+                        active
+                    @endif">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Siswa</p>
+                    </a>
+                </li>
+                @endcannot
+                @can('isAdmin')
+                <li class="nav-item">
+                    <a href="{{ route('kelas.index') }}" class="nav-link @if (Request::segment(1) == 'kelas')
+                        active
+                    @endif">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Kelas</p>
+                    </a>
+                </li>
+                @endcan
             </ul>
           </li>
-          {{-- @endcan --}}
+          @endcan
         <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="#" class="nav-link @if (Request::segment(1) == 'konseling')
+                active
+            @endif">
               <i class="nav-icon fas fa-share"></i>
               <p>
                 Bimbingan
@@ -104,21 +75,35 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{ asset(' ') }}" class="nav-link">
+                <a href="{{ route('konseling.index') }}" class="nav-link">
                   <i class="fa fa-archive nav-icon"></i>
                   <p>Data Bimbingan</p>
                 </a>
               </li>
+              @can('isGuruBK')
               <li class="nav-item">
-                <a href="{{ asset(' ') }}" class="nav-link">
-                  <i class="fa fa-print nav-icon"></i>
-                  <p>Laporan</p>
+                <a href="{{ route('konseling.req', Auth::user()->id) }}" class="nav-link">
+                  <i class="fa fa-archive nav-icon"></i>
+                  <p>Request Konsul</p>
                 </a>
               </li>
+              @endcan
+              @can('isSiswa')
+              <li class="nav-item">
+                <a href="{{ route('konseling.history', ['siswa_id' => Auth::user()->id]) }}" class="nav-link @if (Request::segment(2) == 'history')
+                    active
+                @endif">
+                  <i class="fa fa-print nav-icon"></i>
+                  <p>History</p>
+                </a>
+              </li>
+              @endcan
             </ul>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="#" class="nav-link @if (Request::segment(1) == 'pelanggaran')
+                active
+            @endif">
               <i class="nav-icon fas fa-edit"></i>
               <p>
                 Pelanggaran
@@ -127,17 +112,11 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{ asset('pelanggaran') }}" class="nav-link">
+                <a href="{{ route('pelanggaran.index') }}" class="nav-link">
                   <i class="fa fa-archive nav-icon"></i>
                   <p>Data Pelanggaran</p>
                 </a>
               </li>
-              {{-- <li class="nav-item">
-                <a href="{{ asset(' ') }}" class="nav-link">
-                  <i class="fa fa-print nav-icon"></i>
-                  <p>Laporan</p>
-                </a>
-              </li> --}}
             </ul>
           </li>
         </ul>

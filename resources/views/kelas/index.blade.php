@@ -1,4 +1,5 @@
 @extends('template.master')
+@section('title', '| Kelas')
 
 @push('css')
 <link rel="stylesheet" href="{{ asset('adminLte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
@@ -38,12 +39,6 @@
                         <td>{{ $key + 1 }}</td>
                         <td>{{ $value->nama_kelas }}</td>
                       <td class="d-flex" style="gap: 10px">
-                        {{-- <a href="{{ route('kelas.show', $value->id) }}" class="btn btn-sm btn-info">
-                          Detail
-                        </a>
-                        <a href="{{ route('kelas.edit', $value->id) }}" class="btn btn-sm btn-warning">
-                          Edit
-                        </a> --}}
                         <form action="{{ route('kelas.destroy', $value->id) }}" method="POST">
                           @csrf
                           @method('DELETE')

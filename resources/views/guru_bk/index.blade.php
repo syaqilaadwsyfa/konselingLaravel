@@ -1,14 +1,13 @@
 @extends('template.master')
 
+@section('title', '| Guru')
+
 @push('css')
   <!-- DataTables -->
   <link rel="stylesheet" href="{{ asset('adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
   <link rel="stylesheet" href="{{ asset('adminlte/plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
   <link rel="stylesheet" href="{{ asset('adminlte/plugins/datatables-buttons/css/buttons.bootstrap4.min.css')}}">
-  {{-- <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}"> --}}
 @endpush
-
-@section('title', 'GuruBK')
 
 @section('content')
     <!-- Content Header (Page header) -->
@@ -18,12 +17,6 @@
           <div class="col-sm-12 text-center">
             <h1>Data Guru BK</h1>
           </div>
-          {{-- <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Data Guru BK</li>
-            </ol>
-          </div> --}}
         </div>
       </div><!-- /.container-fluid -->
     </section>
@@ -35,12 +28,9 @@
               <div class="card">
                 <div class="card-header">
                   <div class="col text-right">
-                      {{-- <a href="{{ route('siswa.create') }}" class="btn btn-sm btn-primary">
-                          <i class="fas fa-plus"></i> Add Siswa
-                      </a> --}}
-                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createModal">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createModal">
                         Create
-                      </button>
+                    </button>
                   </div>
                 </div>
               <!-- /.card-header -->
@@ -151,30 +141,7 @@ $(function () {
 
 @endpush
 
-
-{{-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">add siswa</button> --}}
-
-{{-- <div class="modal fade" id="modalTambahSiswa" tabindex="-1" aria-labelledby="modalTambahSiswa" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="modalTambahSiswa">Add Siswa</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form action="{{ route('siswa.store') }}" method="post">
-            @csrf
-            <form action="" method=" ">
-          <div class="form-group">
-            <label for="">Siswa</label>
-            <input type="text" class="form-control" id="addNamaSiswa"
-                aria-descridby="emailHelp">
-            </div>
-          </div> --}}
-
-          <!-- Modal -->
+<!-- Modal -->
 <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -209,9 +176,6 @@ $(function () {
                     @error('no_telp')
                     <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
-
-
-
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
                         <button type="submit" class="btn btn-primary" onclick="submitForm()">Simpan</button>
                   {{-- </div> --}}

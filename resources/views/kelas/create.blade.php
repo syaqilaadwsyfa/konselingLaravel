@@ -1,4 +1,5 @@
 @extends('template.master')
+@section('title', '| Kelas')
 
 @section('content')
 <h2 class="fw-semibold text-center py-3">Form Input Data Kelas</h2>

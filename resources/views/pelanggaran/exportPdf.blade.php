@@ -25,14 +25,6 @@
                 <th>Pelanggaran</th>
                 <th>Tgl Pelanggaran</th>
             </tr>
-            {{-- @foreach ($exportPdf as $item)
-            <tr>
-                <td>{{ $loop->iteration }}</td>
-                <td>{{ $item->nama }}</td>
-                <td>{{ $loop->pelanggaran }}</td>
-                <td>{{ $loop->tgl_pelanggaran }}</td>
-            </tr>
-            @endforeach --}}
             @foreach ($pelanggarans as $key => $pelanggaran)
             <tr>
                 <td>{{ $key +1 }}</td>

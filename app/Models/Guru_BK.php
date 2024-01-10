@@ -14,5 +14,18 @@ class Guru_BK extends Model
         'nip',
         'nama',
         'no_telp',
+        'user_id'
     ];
+
+    public function konseling() {
+        return $this->hasMany(Konseling::class);
+    }
+
+    public function pelanggaran() {
+        return $this->hasMany(Pelanggaran::class);
+    }
+
+    public function user() {
+        return $this->hasMany(User::class, 'id', 'user_id');
+    }
 }

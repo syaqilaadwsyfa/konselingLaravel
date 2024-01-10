@@ -17,12 +17,14 @@ class GuruBkSeeder extends Seeder
             [
                 'nip' => 175378,
                 'nama' => 'Putri',
-                'no_telp' => '08123456789'
+                'no_telp' => '08123456789',
+                'user_id' => 2,
             ],
             [
                 'nip' => 736472,
                 'nama' => 'Raden',
-                'no_telp' => '08987654321'
+                'no_telp' => '08987654321',
+                'user_id' => 6,
             ],
         ];
         foreach($guru_bk as $key => $value) {

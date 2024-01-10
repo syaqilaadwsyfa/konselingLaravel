@@ -67,7 +67,7 @@
         @error('confirm')
             <div class="alert alert-danger">{{ $message }}</div>
         @enderror
-        <input type="hidden" name="role_id" value="3">
+        <input type="hidden" name="role_id" value="2">
           <!-- /.col -->
           <div class="d-grid col-12 mx-auto">
             <button type="submit" class="btn btn-primary btn-block">Register</button>
@@ -76,13 +76,11 @@
         </form>
         <div class="row">
             <div class="col-12 d-grid mx-auto my-3">
-                {{-- <a href="{{ route('auth.login') }}" class="text-center">Sudah Punya Akun</a> --}}
                 <a href="{{ route('auth.dashboard') }}" class="btn btn-outline-secondary btn-block">Back</a>
             </div>
         </div>
         </div>
     </div>
-    <!-- /.form-box -->
   </div><!-- /.card -->
 </div>
 <!-- /.register-box -->

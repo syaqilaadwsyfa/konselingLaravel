@@ -15,29 +15,36 @@ class AuthController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except([
-            'logout', 'dashboard'
+            'logout', 'dashboard', 'register', 'registerGuru'
         ]);
     }
 
     //form register
-    public function register(Request $request)
+    public function register()
     {
         return view('auth.register');
     }
 
+    public function registerGuru()
+    {
+        return view('auth.registerGuru');
+    }
+
     //store register
-    public function store(Request $request, User $user, Auth $auth)
+    public function store(Request $request, Auth $auth)
     {
         $request->validate([
             'nama' => 'required|string|max:250',
             'email' => 'required|email|max:250|unique:users,email',
-            'password' => 'required|max:8'
+            'password' => 'required|min:4',
+            'role_id' => 'required'
         ]);
 
         User::create([
+            'role_id' => $request->role_id,
             'name' => $request->nama,
             'email' => $request->email,
-            'password' => Hash::make($request->password)
+            'password' => Hash::make($request->password),
         ]);
 
         $credential = $request->only('email','password');
@@ -80,10 +87,7 @@ class AuthController extends Controller
     //dashboard
     public function dashboard()
     {
-        if(Auth::check()){
-            return view('auth.dashboard');
-        }
-        return redirect()->route('auth.login');
+        return view('auth.dashboard');
     }
 
     //logout

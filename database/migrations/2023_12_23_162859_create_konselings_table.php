@@ -11,12 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('guru_bks', function (Blueprint $table) {
+        Schema::create('konselings', function (Blueprint $table) {
             $table->id();
-            $table->integer('nip');
-            $table->string('nama', 45);
-            $table->char('no_telp', 45);
-            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('siswa_id')->constrained('siswas');
+            $table->foreignId('guruBk_id')->constrained('guru_bks');
+            $table->date('tgl_konseling');
+            $table->text('keluhan');
+            $table->text('hasil_konseling');
+            $table->string('status');
             $table->timestamps();
         });
     }
@@ -26,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('guru_bks');
+        Schema::dropIfExists('konselings');
     }
 };

@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Login</title>
+  <link rel="shortcut icon" href="{{ asset('adminlte/dist/img/rpl.jpg') }}" type="image/x-icon">
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -18,8 +19,9 @@
 <div class="login-box">
   <!-- /.login-logo -->
   <div class="card card-outline card-primary">
-    <div class="card-header text-center">
-      <a href="{{ asset('AdminLTE/index2.html') }}" class="h1"><b>B-Kita</b></a>
+    <div class="card-header d-flex flex-column justify-content-center align-items-center text-center">
+        <h1 class="fw-bold"><b>B-Kita</b></h1>
+        <img src="{{ asset('adminlte/dist/img/rpl.jpg') }}" alt="..." style="width: 100px">
     </div>
     <div class="card-body">
       <form action="{{ route('auth.authentication') }}" method="post">
@@ -57,6 +59,11 @@
           <!-- /.col -->
         </div>
       </form>
+      <div class="row mt-4">
+        <div class="col">
+            <a href="{{ route('auth.dashboard') }}" class="btn btn-outline-secondary w-100">Back</a>
+        </div>
+      </div>
       <!-- /.social-auth-links -->
     </div>
     <!-- /.card-body -->
