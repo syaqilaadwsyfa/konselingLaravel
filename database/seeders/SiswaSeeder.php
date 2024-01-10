@@ -15,6 +15,18 @@ class SiswaSeeder extends Seeder
     {
         $siswas = [
             [
+                'nis' => 222222,
+                'nama' => 'Siswa',
+                'alamat' => 'Neskar',
+                'kelas_id' => 2,
+                'tgl_lahir' => '2007-10-11',
+                'jenis_kelamin' => 'perempuan',
+                'no_telp_ortu' => '22001111',
+                'agama' => 'islam',
+                'tahun_angkatan' => 2025,
+                'user_id' => 3,
+            ],
+            [
                 'nis' => 191991,
                 'nama' => 'Syaqila',
                 'alamat' => 'jojo banh',
@@ -23,10 +35,11 @@ class SiswaSeeder extends Seeder
                 'jenis_kelamin' => 'perempuan',
                 'no_telp_ortu' => '07070707',
                 'agama' => 'islam',
-                'tahun_angkatan' => 2024
+                'tahun_angkatan' => 2024,
+                'user_id' => 4,
             ],
             [
-                'nis' => 000000,
+                'nis' => 708090,
                 'nama' => 'Rafi',
                 'alamat' => 'calon jojo banh',
                 'kelas_id' => 3,
@@ -34,7 +47,8 @@ class SiswaSeeder extends Seeder
                 'jenis_kelamin' => 'laki-laki',
                 'no_telp_ortu' => '08080808',
                 'agama' => 'islam',
-                'tahun_angkatan' => 2024
+                'tahun_angkatan' => 2024,
+                'user_id' => 5,
             ],
         ];
         foreach($siswas as $key => $value) {

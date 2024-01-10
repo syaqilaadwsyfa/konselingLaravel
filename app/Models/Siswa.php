@@ -21,6 +21,7 @@ class Siswa extends Model
         'no_telp_ortu',
         'agama',
         'tahun_angkatan',
+        'user_id',
     ];
 
     public function kelas()
@@ -28,12 +29,17 @@ class Siswa extends Model
         return $this->hasMany(Kelas::class, 'id', 'kelas_id');
     }
 
+    public function user() {
+        return $this->hasMany(User::class, 'id', 'user_id');
+    }
+
     public function pelanggaran()
     {
         return $this->hasMany(Pelanggaran::class);
     }
 
-    // public function siswa() {
-    //     return $this->hasMany(Siswa::class, 'id', 'siswa_id');
-    // }
+    public function konseling()
+    {
+        return $this->hasMany(Konseling::class);
+    }
 }

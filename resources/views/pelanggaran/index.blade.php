@@ -5,7 +5,6 @@
   <link rel="stylesheet" href="{{ asset('adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
   <link rel="stylesheet" href="{{ asset('adminlte/plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
   <link rel="stylesheet" href="{{ asset('adminlte/plugins/datatables-buttons/css/buttons.bootstrap4.min.css')}}">
-  {{-- <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}"> --}}
 @endpush
 
 @section('title', 'pelanggaran')
@@ -18,12 +17,6 @@
             <div class="col-sm-12 text-center">
                 <h1>Data Pelanggaran</h1>
             </div>
-          {{-- <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">DataTables</li>
-            </ol>
-          </div> --}}
         </div>
       </div><!-- /.container-fluid -->
     </section>
@@ -31,21 +24,20 @@
     <section class="content">
         <div class="container-fluid">
           <div class="row">
-            <div class="col-12">
+            <div class="col-md-12 col-sm-5">
               <div class="card">
                 <div class="card-header">
-                  <div class="col text-right">
-                      {{-- <a href="{{ route('pelanggaran.create') }}" class="btn btn-sm btn-primary">
-                          <i class="fas fa-plus"></i> Add pelanggaran
-                      </a> --}}
-                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createModal">
-                        <i class="fas fa-plus pe-5"></i>Create
-                      </button>
-                      <button type="button" class="btn btn-success" data-toggle="modal" data-target="#createModal">
-                        <i class="fas fa-print pe-2"></i>Export PDF
-                    </button>
-                  </div>
-                  </div>
+                    @cannot('isSiswa')
+                    <div class="col text-right">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createModal">
+                          <i class="fas fa-plus pe-5"></i>Create
+                        </button>
+                        <a href="{{ route('exportPdf') }}" target="_blank" class="btn btn-success">
+                          <i class="fas fa-print pe-2"></i>Export PDF
+                        </a>
+                    </div>
+                    @endcannot
+                </div>
               <!-- /.card-header -->
               <div class="card-body">
                 <table id="example2" class="table table-bordered table-hover">
@@ -56,9 +48,6 @@
                     <th>Nama</th>
                     <th>Kelas</th>
                     <th>Pelanggaran</th>
-                    {{-- <th>Catatan</th>
-                    <th>Tgl Pelanggaran</th>
-                    <th>Tindakan</th> --}}
                     <th>Action</th>
                   </tr>
                   </thead>
@@ -67,28 +56,27 @@
                     <tr>
                         <td>{{ $key +1 }} </td>
                         @forelse ($value->siswa as $siswa)
-                        {{ dd($siswa) }}
                         <td>{{ $siswa->nis }} </td>
                         <td>{{ $siswa->nama }} </td>
-                        <td>{{ $siswa->kelas }} </td>
+                        <td>@forelse ($siswa->kelas as $kelas)
+                            {{ $kelas->nama_kelas }}
+                        @empty
+                            hooh
+                        @endforelse</td>
                         @empty
                             hooh
                         @endforelse
                         <td>{{ $value->pelanggaran }} </td>
-                        {{-- <td>{{ $value->catatan }} </td> --}}
-                        {{-- <td>{{ $value->tgl_pelanggaran }} </td> --}}
-                        {{-- <td>{{ $value->tindakan }} </td> --}}
-                        <td class="d-flex" style="gap: 10px">
+                        <td class="d-flex align-items-center" style="gap: 10px">
                             <a href="{{ route('pelanggaran.show', $value->id) }}" class="btn btn-sm btn-info" style="margin-left: 8px;">Detail</a>
+                            @cannot('isSiswa')
                             <a href="{{ route('pelanggaran.edit', $value->id) }}" class="btn btn-sm btn-warning" style="margin-left: 8px;">Edit</a>
                             <form action="{{ route('pelanggaran.destroy', $value->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger" style="margin-left: 8px;">Hapus</button>
+                                <button type="submit" class="btn btn-sm btn-danger mt-3" style="margin-left: 8px;">Hapus</button>
                             </form>
-                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#createModal">
-                                <i class="fas fa-print pe-2"></i>Export PDF
-                            </button>
+                            @endcannot
                         </td>
                     </tr>
                     @endforeach
@@ -159,7 +147,7 @@ $(function () {
 @endpush
 
 
-          <!-- Modal -->
+<!-- Modal -->
 <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -174,31 +162,6 @@ $(function () {
             <form action="{{ route('pelanggaran.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="card-body">
-                  {{-- <div class="form-group">
-                    <label for="nis">NIS</label>
-                    <input type="number" name="nis" class="form-control @error('nis') is-invalid @enderror" id="nis" placeholder="Enter Nis Anda">
-                  </div>
-                  @error('nis')
-                  <div class="alert alert-danger">{{ $message }}</div>
-                  @enderror
-                  <div class="form-group">
-                    <label for="nama">Nama</label>
-                    <input type="text" name="nama" class="form-control @error('nama') is-invalid @enderror" id="nama" placeholder="Enter Nama Anda">
-                 </div>
-                 @error('nama')
-                  <div class="alert alert-danger">{{ $message }}</div>
-                 @enderror
-                 <div class="mb-2">
-                    <label for="kelas">Kelas</label>
-                    <select name="kelas_id" id="kelas" class="form-control @error('kelas') is-invalid @enderror">
-                        <option disabled selected>--Pilih Salah Satu--</option>
-                        @forelse ($kelases as $key => $value)
-                            <option value="{{ $value->id }}">{{ $value->nama_kelas }}</option>
-                        @empty
-                            <option disabled>--Data Masih Kosong--</option>
-                        @endforelse
-                    </select>
-                </div> --}}
                       <div class="form-group">
                         <label for="siswa_id">Nama Siswa</label>
                         <select name="siswa_id" id="siswa_id" class="form-control @error('siswa_id') is-invalid @enderror">

@@ -226,7 +226,7 @@ $(function () {
                        @error('nama')
                         <div class="alert alert-danger">{{ $message }}</div>
                        @enderror
-                       <div class="form-group">
+                        <div class="form-group">
                           <label for="alamat">Alamat</label>
                           <textarea name="alamat" id="alamat" cols="30" rows="10" class="form-control @error('alamat') is-invalid @enderror" placeholder="Enter alamat Anda"></textarea>
                         </div>
